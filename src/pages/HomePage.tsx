@@ -1,5 +1,6 @@
 // src/pages/HomePage.tsx
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { HeroSection } from "../components/home/HeroSection";
 import { HowItWorksSection } from "../components/home/HowItWorksSection";
@@ -7,22 +8,31 @@ import { LessonsPreviewSection } from "../components/home/LessonsPreviewSection"
 import { PracticePreviewSection } from "../components/home/PracticePreviewSection";
 import { StoriesTeaserSection } from "../components/home/StoriesTeaserSection";
 import { WhoIsThisForSection } from "../components/home/WhoIsThisForSection";
+import { loadCompletedLessons } from "../data/progress";
+
 
 export const HomePage: React.FC = () => {
+
+  const completedLessons = loadCompletedLessons();
+
+  const navigate = useNavigate();
+
   const handleStartLesson = () => {
-    console.log("Start Lesson 1 clicked");
+    navigate("/lesson/1");
   };
 
   const handleTryPractice = () => {
-    console.log("Try Practice clicked");
+    navigate("/practice");
   };
 
   const handleOpenLesson = (lessonId: string) => {
-    console.log("Open lesson clicked:", lessonId);
+    // lessonId is like "lesson-1" in our demo; extract the number
+    const num = lessonId.replace("lesson-", "");
+    navigate(`/lesson/${num}`);
   };
 
   const handleGoToStories = () => {
-    console.log("Navigate to stories page");
+    navigate("/stories");
   };
 
   return (
@@ -38,7 +48,11 @@ export const HomePage: React.FC = () => {
 
       <PracticePreviewSection onTryPractice={handleTryPractice} />
 
-      <StoriesTeaserSection onGoToStories={handleGoToStories} />
+      <StoriesTeaserSection
+        onGoToStories={handleGoToStories}
+        completedLessons={completedLessons}
+      />
+
 
       <WhoIsThisForSection />
     </>

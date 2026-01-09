@@ -7,6 +7,8 @@ import { HomePage } from "./pages/HomePage";
 import { LearnPage } from "./pages/LearnPage";
 import { PracticePage } from "./pages/PracticePage";
 import { StoriesPage } from "./pages/StoriesPage";
+import { LessonPage } from "./pages/LessonPage";
+
 
 function App() {
   return (
@@ -14,8 +16,10 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/learn" element={<LearnPage />} />
+        <Route path="/lesson/:id" element={<LessonPage />} />
         <Route path="/practice" element={<PracticePage />} />
         <Route path="/stories" element={<StoriesPage />} />
+
 
         {/* fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
