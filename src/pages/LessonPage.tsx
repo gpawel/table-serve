@@ -1,33 +1,60 @@
 // src/pages/LessonPage.tsx
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getLessonById } from "../data/lessons";
+import { markLessonComplete, readStoredProgress } from "../data/progress";
 
-const STORAGE_KEY = "ts_demo_completed_lessons";
 
-function loadCompleted(): number[] {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [];
-    const arr = JSON.parse(raw);
-    if (!Array.isArray(arr)) return [];
-    return arr.filter((x) => typeof x === "number");
-  } catch {
-    return [];
-  }
-}
 
-function saveCompleted(ids: number[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(ids));
-}
+
 
 export const LessonPage: React.FC = () => {
-  const params = useParams();
-  const lessonId = Number(params.id);
+  
+  const { id } = useParams<{ id: string }>();
+  if (!id) {
+  return (
+    <div style={{ padding: "1rem 1.5rem", maxWidth: "960px", margin: "0 auto" }}>
+      <h1>Invalid lesson</h1>
+      <p>Lesson id is missing.</p>
+      <Link to="/learn">Back to Learn</Link>
+    </div>
+  );
+}
+const lessonId = Number(id);
+  
+  if (!Number.isFinite(lessonId)) {
+  return (
+    <div style={{ padding: "1rem 1.5rem", maxWidth: "960px", margin: "0 auto" }}>
+      <h1>Invalid lesson</h1>
+      <p>Lesson id must be a number.</p>
+      <Link to="/learn">Back to Learn</Link>
+    </div>
+  );
+}
+
+
+
   const lesson = useMemo(() => getLessonById(lessonId), [lessonId]);
 
   const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [completed, setCompleted] = useState(() => loadCompleted().includes(lessonId));
+  const [completed, setCompleted] = useState(() =>
+    readStoredProgress().completedLessonIds.includes(lessonId)
+  );
+
+  useEffect(() => {
+  const sync = () => {
+    setCompleted(readStoredProgress().completedLessonIds.includes(lessonId));
+  };
+
+  // keep in sync in the same tab when progress changes
+  window.addEventListener("progress:updated", sync);
+
+  // also sync once when lessonId changes (navigation)
+  sync();
+
+  return () => window.removeEventListener("progress:updated", sync);
+}, [lessonId]);
+
 
   if (!lesson) {
     return (
@@ -50,23 +77,18 @@ export const LessonPage: React.FC = () => {
   const canSubmit = answered === total;
 
   const submit = () => {
-    if (!canSubmit) return;
+  if (!canSubmit) return;
 
-    // MVP rule: pass if score >= 4 out of 5
-    const passed = score >= Math.max(1, total - 1);
+  const passed = score >= Math.max(1, total - 1);
 
-    if (passed) {
-      const current = loadCompleted();
-      if (!current.includes(lesson.id)) {
-        const next = [...current, lesson.id].sort((a, b) => a - b);
-        saveCompleted(next);
-      }
-      setCompleted(true);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      alert(`Score ${score}/${total}. Try again 🙂`);
-    }
-  };
+  if (passed) {
+    markLessonComplete(lessonId);
+    setCompleted(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    alert(`Score ${score}/${total}. Try again 🙂`);
+  }
+};
 
   return (
     <div style={{ padding: "1rem 1.5rem", maxWidth: "960px", margin: "0 auto" }}>

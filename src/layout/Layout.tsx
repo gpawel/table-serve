@@ -1,6 +1,10 @@
 // src/layout/Layout.tsx
 import React from "react";
 import { Link } from "react-router-dom";
+import { ProgressBar } from "../components/ProgressBar";
+import { useProgress } from "../hooks/useProgress";
+import { lessons } from "../data/lessons";
+
 
 
 const navLinkStyle: React.CSSProperties = {
@@ -16,6 +20,9 @@ type LayoutProps = {
 };
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const totalLessonIds = lessons.map((l) => l.id);
+  const progress = useProgress(totalLessonIds);
+
   return (
     <div>
       <header>

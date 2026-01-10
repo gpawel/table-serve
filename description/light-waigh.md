@@ -1,0 +1,1 @@
+**A lightweight, gamified learning platform that teaches real-world skills through progression, stories, and mastery.**

@@ -8,12 +8,12 @@ import { LessonsPreviewSection } from "../components/home/LessonsPreviewSection"
 import { PracticePreviewSection } from "../components/home/PracticePreviewSection";
 import { StoriesTeaserSection } from "../components/home/StoriesTeaserSection";
 import { WhoIsThisForSection } from "../components/home/WhoIsThisForSection";
-import { loadCompletedLessons } from "../data/progress";
+import { readStoredProgress } from "../data/progress";
 
 
 export const HomePage: React.FC = () => {
 
-  const completedLessons = loadCompletedLessons();
+  const completedLessons = readStoredProgress().completedLessonIds;
 
   const navigate = useNavigate();
 
