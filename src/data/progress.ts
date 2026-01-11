@@ -1,101 +1,73 @@
+// src/data/progress.ts
 
+export type LessonProgress = {
+  completedLessonIds: number[];
+};
 
-/** ✅ Change this if your app already uses a different key */
+// ✅ compatibility export expected by useProgress.ts
+//export const PROGRESS_STORAGE_KEY = "tableServing.lessonProgress";
+
 export const PROGRESS_STORAGE_KEY = "tableServing.lessonProgress";
 
+const EMPTY: LessonProgress = { completedLessonIds: [] };
 
+function isLessonProgress(value: unknown): value is LessonProgress {
+  if (typeof value !== "object" || value === null) return false;
 
-export type StoredProgress = {
-  completedLessonIds: number[];
-};
+  const v = value as Record<string, unknown>;
+  return (
+    Array.isArray(v.completedLessonIds) &&
+    v.completedLessonIds.every((id) => typeof id === "number")
+  );
+}
 
-export type ProgressState = {
-  completedLessonIds: number[];
-  completedCount: number;
-  totalCount: number;
-  percent: number; // 0..100
-  level: "Beginner" | "Intermediate" | "Master";
-};
-
-export function readStoredProgress(
-  storageKey: string = PROGRESS_STORAGE_KEY
-): StoredProgress {
-  const raw = localStorage.getItem(storageKey);
-  if (!raw) return { completedLessonIds: [] };
+export function readStoredProgress(): LessonProgress {
+  const raw = localStorage.getItem(PROGRESS_STORAGE_KEY);
+  if (!raw) return EMPTY;
 
   try {
-    const data = JSON.parse(raw);
-
-    if (
-      typeof data === "object" &&
-      data !== null &&
-      Array.isArray((data as any).completedLessonIds)
-    ) {
-      const ids = (data as any).completedLessonIds.filter(
-        (x: unknown): x is number => typeof x === "number" && Number.isFinite(x)
-      );
-      return { completedLessonIds: ids };
-    }
-
-    // invalid shape -> ignore
-    return { completedLessonIds: [] };
+    const parsed: unknown = JSON.parse(raw);
+    return isLessonProgress(parsed) ? parsed : EMPTY;
   } catch {
-    // corrupt -> ignore
-    return { completedLessonIds: [] };
+    return EMPTY;
   }
 }
 
-export function writeStoredProgress(
-  progress: StoredProgress,
-  storageKey: string = PROGRESS_STORAGE_KEY
-) {
-  localStorage.setItem(storageKey, JSON.stringify(progress));
+export function writeStoredProgress(progress: LessonProgress): void {
+  localStorage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify(progress));
   window.dispatchEvent(new Event("progress:updated"));
 }
 
-export function markLessonComplete(
-  lessonId: number,
-  storageKey: string = PROGRESS_STORAGE_KEY
-): StoredProgress {
-  const current = readStoredProgress(storageKey);
-  const set = new Set<number>(current.completedLessonIds);
-  set.add(lessonId);
+export function markLessonComplete(lessonId: number): void {
+  if (!Number.isFinite(lessonId)) return;
 
-  const next: StoredProgress = { completedLessonIds: Array.from(set) };
-  writeStoredProgress(next, storageKey);
-  return next;
+  const current = readStoredProgress();
+  const merged = new Set(current.completedLessonIds);
+  merged.add(lessonId);
+
+  writeStoredProgress({
+    completedLessonIds: Array.from(merged),
+  });
 }
 
-export function computeProgress(
-  totalLessonIds: number[],
-  stored: StoredProgress
-): ProgressState {
-  const totalCount = totalLessonIds.length;
+// /* ============================================================
+//    ✅ Compatibility layer for older code (useProgress.ts etc.)
+//    ============================================================ */
 
-  const completedSet = new Set<number>(stored.completedLessonIds);
-  const completedCount = totalLessonIds.reduce(
-    (acc, id) => acc + (completedSet.has(id) ? 1 : 0),
-    0
-  );
+// export type StoredProgress = LessonProgress;
 
-  const percent = totalCount === 0 ? 0 : Math.round((completedCount / totalCount) * 100);
+// export type ProgressState = {
+//   completedCount: number;
+//   totalCount: number;
+//   percent: number; // 0..100
+// };
 
-  const level: ProgressState["level"] =
-    percent >= 100 ? "Master" : percent >= 40 ? "Intermediate" : "Beginner";
+// export function computeProgress(totalLessonIds: number[], progress?: StoredProgress): ProgressState {
+//   const p = progress ?? readStoredProgress();
 
-  return {
-    completedLessonIds: Array.from(completedSet),
-    completedCount,
-    totalCount,
-    percent,
-    level,
-  };
-}
+//   const totalCount = totalLessonIds.length;
+//   const completedCount = totalLessonIds.filter((id) => p.completedLessonIds.includes(id)).length;
+//   const percent = totalCount === 0 ? 0 : Math.round((completedCount / totalCount) * 100);
 
-export function isLessonCompleted(
-  lessonId: number,
-  storageKey: string = PROGRESS_STORAGE_KEY
-) {
-  const stored = readStoredProgress(storageKey);
-  return stored.completedLessonIds.includes(lessonId);
-}
+//   return { completedCount, totalCount, percent };
+// }

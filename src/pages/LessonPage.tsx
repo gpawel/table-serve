@@ -9,63 +9,63 @@ import { markLessonComplete, readStoredProgress } from "../data/progress";
 
 
 export const LessonPage: React.FC = () => {
-  
   const { id } = useParams<{ id: string }>();
-  if (!id) {
-  return (
-    <div style={{ padding: "1rem 1.5rem", maxWidth: "960px", margin: "0 auto" }}>
-      <h1>Invalid lesson</h1>
-      <p>Lesson id is missing.</p>
-      <Link to="/learn">Back to Learn</Link>
-    </div>
+  const lessonId = id ? Number(id) : NaN;
+
+  // ✅ hooks must be unconditional
+  const lesson = useMemo(
+    () => (Number.isFinite(lessonId) ? getLessonById(lessonId) : null),
+    [lessonId]
   );
-}
-const lessonId = Number(id);
-  
-  if (!Number.isFinite(lessonId)) {
-  return (
-    <div style={{ padding: "1rem 1.5rem", maxWidth: "960px", margin: "0 auto" }}>
-      <h1>Invalid lesson</h1>
-      <p>Lesson id must be a number.</p>
-      <Link to="/learn">Back to Learn</Link>
-    </div>
-  );
-}
-
-
-
-  const lesson = useMemo(() => getLessonById(lessonId), [lessonId]);
 
   const [answers, setAnswers] = useState<Record<string, string>>({});
-  const [completed, setCompleted] = useState(() =>
-    readStoredProgress().completedLessonIds.includes(lessonId)
-  );
+  const [completed, setCompleted] = useState(false);
 
   useEffect(() => {
-  const sync = () => {
-    setCompleted(readStoredProgress().completedLessonIds.includes(lessonId));
-  };
+    if (!Number.isFinite(lessonId)) return;
 
-  // keep in sync in the same tab when progress changes
-  window.addEventListener("progress:updated", sync);
+    const sync = () => {
+      setCompleted(readStoredProgress().completedLessonIds.includes(lessonId));
+    };
 
-  // also sync once when lessonId changes (navigation)
-  sync();
+    window.addEventListener("progress:updated", sync);
+    sync();
 
-  return () => window.removeEventListener("progress:updated", sync);
-}, [lessonId]);
+    return () => window.removeEventListener("progress:updated", sync);
+  }, [lessonId]);
 
-
-  if (!lesson) {
+  // ✅ early returns AFTER hooks
+  if (!id) {
     return (
-      <div style={{ padding: "1rem 1.5rem", maxWidth: "960px", margin: "0 auto" }}>
-        <h1>Lesson not found</h1>
-        <p>
-          <Link to="/learn">Back to Learn</Link>
-        </p>
+      <div style={{ padding: "1rem 1.5rem", maxWidth: 960, margin: "0 auto" }}>
+        <h1>Invalid lesson</h1>
+        <p>Lesson id is missing.</p>
+        <Link to="/learn">Back to Learn</Link>
       </div>
     );
   }
+
+  if (!Number.isFinite(lessonId)) {
+    return (
+      <div style={{ padding: "1rem 1.5rem", maxWidth: 960, margin: "0 auto" }}>
+        <h1>Invalid lesson</h1>
+        <p>Lesson id must be a number.</p>
+        <Link to="/learn">Back to Learn</Link>
+      </div>
+    );
+  }
+
+  if (!lesson) {
+    return (
+      <div style={{ padding: "1rem 1.5rem", maxWidth: 960, margin: "0 auto" }}>
+        <h1>Lesson not found</h1>
+        <Link to="/learn">Back to Learn</Link>
+      </div>
+    );
+  }
+
+  // 🔽 rest of your component unchanged
+
 
   const total = lesson.quiz.length;
   const answered = Object.keys(answers).length;
@@ -77,18 +77,18 @@ const lessonId = Number(id);
   const canSubmit = answered === total;
 
   const submit = () => {
-  if (!canSubmit) return;
+    if (!canSubmit) return;
 
-  const passed = score >= Math.max(1, total - 1);
+    const passed = score >= Math.max(1, total - 1);
 
-  if (passed) {
-    markLessonComplete(lessonId);
-    setCompleted(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  } else {
-    alert(`Score ${score}/${total}. Try again 🙂`);
-  }
-};
+    if (passed) {
+      markLessonComplete(lessonId);
+      setCompleted(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      alert(`Score ${score}/${total}. Try again 🙂`);
+    }
+  };
 
   return (
     <div style={{ padding: "1rem 1.5rem", maxWidth: "960px", margin: "0 auto" }}>

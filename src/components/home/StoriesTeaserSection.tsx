@@ -40,7 +40,7 @@ export const StoriesTeaserSection: React.FC<StoriesTeaserSectionProps> = ({
               }}
             >
               <div style={{ fontSize: "0.85rem", color: "#777", marginBottom: "0.5rem" }}>
-                {unlocked ? "🔓 Unlocked" : "🔒 Locked"} • Unlock after Lesson {story.unlockLessonId}
+                {unlocked ? "🔓 Unlocked" : "🔒 Locked"} • Unlock after Lesson {story.requiredLessonId}
               </div>
 
               <h3 style={{ fontSize: "1.1rem", color: "#1F1F1F", marginTop: 0 }}>

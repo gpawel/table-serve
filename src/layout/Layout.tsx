@@ -19,6 +19,8 @@ type LayoutProps = {
   children: React.ReactNode;
 };
 
+// src/layout/Layout.tsx
+
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const totalLessonIds = lessons.map((l) => l.id);
   const progress = useProgress(totalLessonIds);
@@ -35,37 +37,24 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             alignItems: "center",
           }}
         >
-          <Link
-            to="/"
-            style={{
-              fontWeight: 600,
-              whiteSpace: "nowrap",
-              color: "#1F1F1F",
-              textDecoration: "none",
-            }}
-          >
+          <Link to="/" style={{ fontWeight: 600, textDecoration: "none", color: "#1F1F1F" }}>
             TableServing.app
           </Link>
 
-
-          <nav
-            style={{
-              fontSize: "0.95rem",
-              display: "flex",
-              gap: "1rem",
-              whiteSpace: "nowrap",
-            }}
-          >
-            <Link to="/learn" style={navLinkStyle}>
-              Learn
-            </Link>
-            <Link to="/practice" style={navLinkStyle}>
-              Practice
-            </Link>
-            <Link to="/stories" style={navLinkStyle}>
-              Stories 🔒
-            </Link>
+          <nav style={{ display: "flex", gap: "1rem" }}>
+            <Link to="/learn" style={navLinkStyle}>Learn</Link>
+            <Link to="/practice" style={navLinkStyle}>Practice</Link>
+            <Link to="/stories" style={navLinkStyle}>Stories 🔒</Link>
           </nav>
+        </div>
+
+        {/* ✅ ADD THIS */}
+        <div style={{ maxWidth: 960, margin: "0.75rem auto" }}>
+          <ProgressBar
+            completedCount={progress.completedCount}
+            totalCount={progress.totalCount}
+            percent={progress.percent}
+          />
         </div>
       </header>
 
@@ -73,3 +62,4 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     </div>
   );
 };
+

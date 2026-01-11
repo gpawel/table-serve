@@ -1,34 +1,36 @@
-// src/hooks/useProgress.ts
 import { useEffect, useMemo, useState } from "react";
-import {
-  PROGRESS_STORAGE_KEY,
-  readStoredProgress,
-  computeProgress,
-  type ProgressState,
-  type StoredProgress,
-} from "../data/progress";
+import { readStoredProgress, PROGRESS_STORAGE_KEY } from "../data/progress";
 
-export function useProgress(totalLessonIds: number[], storageKey = PROGRESS_STORAGE_KEY) {
-  const [stored, setStored] = useState<StoredProgress>(() => readStoredProgress(storageKey));
+export function useProgress(totalLessonIds: number[]) {
+  const [completedIds, setCompletedIds] = useState<number[]>(
+    () => readStoredProgress().completedLessonIds
+  );
 
   useEffect(() => {
-    const onCustom = () => setStored(readStoredProgress(storageKey));
-    window.addEventListener("progress:updated", onCustom);
+    const sync = () => {
+      setCompletedIds(readStoredProgress().completedLessonIds);
+    };
 
+    // in-app updates
+    window.addEventListener("progress:updated", sync);
+
+    // OPTIONAL: cross-tab updates
     const onStorage = (e: StorageEvent) => {
-      if (e.key === storageKey) setStored(readStoredProgress(storageKey));
+      if (e.key === PROGRESS_STORAGE_KEY) sync();
     };
     window.addEventListener("storage", onStorage);
 
     return () => {
-      window.removeEventListener("progress:updated", onCustom);
+      window.removeEventListener("progress:updated", sync);
       window.removeEventListener("storage", onStorage);
     };
-  }, [storageKey]);
+  }, []);
 
-  const progress: ProgressState = useMemo(() => {
-    return computeProgress(totalLessonIds, stored);
-  }, [totalLessonIds, stored]);
+  return useMemo(() => {
+    const totalCount = totalLessonIds.length;
+    const completedCount = totalLessonIds.filter((id) => completedIds.includes(id)).length;
+    const percent = totalCount === 0 ? 0 : Math.round((completedCount / totalCount) * 100);
 
-  return progress;
+    return { totalCount, completedCount, percent };
+  }, [totalLessonIds, completedIds]);
 }
