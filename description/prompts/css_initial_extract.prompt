@@ -1,0 +1,49 @@
+Goal:
+Extract inline styles from React components into external CSS files, keeping the UI visually identical.
+
+Context:
+This is a demo React + Vite app (TableServing.app) built for investor demos.
+There is no backend; progress is stored in localStorage.
+Automated tests (Vitest + Testing Library) already exist and must remain valid.
+
+Scope (files to refactor):
+- src/layout/Layout.tsx
+- src/pages/HomePage.tsx
+- src/pages/LearnPage.tsx
+- src/pages/LessonPage.tsx
+- src/pages/StoriesPage.tsx
+- src/pages/StoryPage.tsx
+- Any small shared components if needed
+
+Styling requirements:
+- Use plain CSS (no Tailwind, no CSS-in-JS, no new libraries).
+- Create 1 primary CSS file, max 2 if truly needed.
+  Suggested location:
+    - src/styles/global.css
+- Import CSS once at app entry (e.g., main.tsx).
+- Replace inline style objects with className-based styles.
+- Prefer reusable classes (container, header, nav, card, button, muted text).
+- Avoid global tag selectors (no `h1 {}` or `div p` rules).
+
+Constraints:
+- Do NOT redesign the UI.
+- Do NOT change spacing, colors, fonts, or layout behavior.
+- Do NOT change visible text (button labels, headings, messages).
+- Do NOT change routing, logic, or state behavior.
+
+Test safety (important):
+- Keep existing DOM structure as stable as possible.
+- Do not remove elements that tests rely on.
+- Avoid changing text content used by tests.
+- If adding className wrappers, do not break existing accessibility roles.
+- All existing tests must continue to pass.
+
+Verification:
+- npm run ci must pass (lint, typecheck, tests, build).
+- Manual smoke test:
+  - Home → Learn → Lesson 1 → complete quiz → Stories → open unlocked story.
+
+Deliverable:
+- Cleaned React components with no inline styles.
+- One (or at most two) well-organized CSS files.
+- No test regressions.

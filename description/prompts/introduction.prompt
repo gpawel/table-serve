@@ -1,0 +1,38 @@
+Me: you can find files with screen shots at description/screens
+The application is a set of "lessons" with quizes, some practical game-like excercises and as a bonus for a passed lessong some funny story related to the lesson.
+ChatGPT helped me to build the "demo" app. The main goal to have something to show to potential investors.
+The code and screenshots you see are the current state.
+There are still several features to do and I would like to switch for help here from ChatGPT because it is much more convinient.
+
+Codex:
+Absolutely. To continue, I need a bit more direction. What’s the highest‑priority goal right now?
+
+Pick one (or tell me another):
+
+Design polish on specific screens (which page?)
+New feature/functionality (describe desired behavior)
+Test fixes or new tests (which flows failing/missing?)
+Bug fixes (what’s broken?)
+Also tell me if you have any visual references or product requirements.
+
+Me:
+in what form can I provide you the visual reference? I cat take several screen shots for example or url to the locally runnig app.
+after that I can explain you what the app is about.
+
+
+Screenshots are perfect. You can share 2–5 key screens (home, lesson, stories, any problem area). If it’s a local app URL, I can’t access it directly, but a screen capture works great.
+
+Also helpful:
+
+Target audience + style goals (e.g., “warm, elegant, modern”).
+Any existing brand colors or fonts.
+Priority pages to redesign first.
+
+Me
+screen shots' names corespond to what they are.  hope_page_1 shows first part of the home page.
+learn_and_quize_page shows a template for a lesson and quize related to lesson's topic.
+learn_page is a container where user can navigate through available lessons.
+For the demo we don't use back end. just local browser storage.
+At this point I don't know what an investor will want. I want something that will be good enouth for demo - it will be no shame to demo it.
+The color schema - let's leave it like this. my business partners may want to change it later.
+my next immideate priority would be to take css outside of the code and make it a separated file that will be referenced from code.

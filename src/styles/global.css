@@ -1,0 +1,681 @@
+.ts-page-container {
+  padding: 1rem 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.ts-layout-header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ts-layout-logo {
+  font-weight: 600;
+  text-decoration: none;
+  color: #1f1f1f;
+}
+
+.ts-layout-nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.ts-layout-nav-link {
+  color: #1f1f1f;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  display: inline-block;
+}
+
+.ts-layout-progress {
+  max-width: 960px;
+  margin: 0.75rem auto;
+}
+
+.ts-progress-card {
+  display: grid;
+  gap: 0.4rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(6px);
+}
+
+.ts-progress-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ts-progress-label {
+  font-weight: 600;
+}
+
+.ts-progress-value {
+  opacity: 0.8;
+}
+
+.ts-progress-track {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.ts-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.6);
+  transition: width 220ms ease;
+}
+
+.ts-hero-section {
+  padding: 3rem 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+}
+
+.ts-hero-content {
+  flex: 1;
+}
+
+.ts-hero-title {
+  font-size: 2.2rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: #1f1f1f;
+}
+
+.ts-hero-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  color: #3a3a3a;
+}
+
+.ts-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.ts-hero-primary {
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background-color: #f5dbd6;
+  color: #1f1f1f;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.ts-hero-secondary {
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  border: 1px solid #c8b89f;
+  cursor: pointer;
+  background-color: transparent;
+  color: #1f1f1f;
+  font-size: 1rem;
+}
+
+.ts-hero-visual {
+  flex: 1;
+  min-height: 220px;
+  border-radius: 16px;
+  border: 1px solid #e5e5e5;
+  background: linear-gradient(135deg, #ffffff 0%, #f7f7f7 40%, #f5dbd6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.ts-hero-visual-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin: 0 auto 0.75rem;
+}
+
+.ts-hero-visual-text {
+  font-size: 0.95rem;
+  color: #3a3a3a;
+}
+
+.ts-how-section {
+  padding: 3rem 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ts-how-title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #1f1f1f;
+}
+
+.ts-how-subtitle {
+  margin-bottom: 2.5rem;
+  font-size: 1rem;
+  color: #3a3a3a;
+}
+
+.ts-how-steps {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ts-how-card {
+  flex: 1 1 220px;
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.ts-how-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.ts-how-card-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #1f1f1f;
+}
+
+.ts-how-card-text {
+  font-size: 0.95rem;
+  color: #3a3a3a;
+  line-height: 1.4;
+}
+
+.ts-lessons-preview {
+  padding: 3rem 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.ts-lessons-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #1f1f1f;
+}
+
+.ts-lessons-subtitle {
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  color: #3a3a3a;
+}
+
+.ts-lessons-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.ts-lessons-view-all {
+  margin-top: 2rem;
+  text-align: right;
+}
+
+.ts-lessons-view-all-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #1f1f1f;
+  text-decoration: underline;
+}
+
+.ts-lesson-card {
+  flex: 1 1 260px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 190px;
+}
+
+.ts-lesson-card-meta {
+  font-size: 0.85rem;
+  color: #777777;
+  margin-bottom: 0.25rem;
+}
+
+.ts-lesson-card-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #1f1f1f;
+}
+
+.ts-lesson-card-summary {
+  font-size: 0.95rem;
+  color: #3a3a3a;
+  margin-bottom: 0.75rem;
+}
+
+.ts-lesson-card-footer {
+  margin-top: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ts-lesson-card-details {
+  font-size: 0.85rem;
+  color: #555555;
+}
+
+.ts-lesson-card-dot {
+  margin: 0 0.35rem;
+}
+
+.ts-lesson-card-button {
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background-color: #f5dbd6;
+  color: #1f1f1f;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ts-practice-section {
+  padding: 3rem 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+}
+
+.ts-practice-content {
+  flex: 1;
+}
+
+.ts-practice-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+  color: #1f1f1f;
+}
+
+.ts-practice-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  color: #3a3a3a;
+}
+
+.ts-practice-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background-color: #f5dbd6;
+  color: #1f1f1f;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.ts-practice-visual {
+  flex: 1;
+  min-height: 190px;
+  border-radius: 16px;
+  border: 1px dashed #c8b89f;
+  background-color: #f7f7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.ts-practice-visual-title {
+  font-size: 0.95rem;
+  color: #555555;
+  margin-bottom: 0.5rem;
+}
+
+.ts-practice-visual-text {
+  font-size: 0.9rem;
+  color: #777777;
+}
+
+.ts-stories-teaser {
+  padding: 3rem 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.ts-stories-teaser-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+  color: #1f1f1f;
+}
+
+.ts-stories-teaser-description {
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  color: #3a3a3a;
+}
+
+.ts-stories-teaser-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.ts-stories-teaser-card {
+  flex: 1 1 260px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.ts-stories-teaser-card-unlocked {
+  border: 1px solid #e5e5e5;
+  opacity: 1;
+}
+
+.ts-stories-teaser-card-locked {
+  border: 1px solid #f5dbd6;
+  opacity: 0.85;
+}
+
+.ts-stories-teaser-meta {
+  font-size: 0.85rem;
+  color: #777777;
+  margin-bottom: 0.5rem;
+}
+
+.ts-stories-teaser-card-title {
+  font-size: 1.1rem;
+  color: #1f1f1f;
+  margin-top: 0;
+}
+
+.ts-stories-teaser-actions {
+  margin-top: 2rem;
+  text-align: right;
+}
+
+.ts-stories-teaser-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #1f1f1f;
+  text-decoration: underline;
+}
+
+.ts-who-section {
+  padding: 3rem 1.5rem 4rem;
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ts-who-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+  color: #1f1f1f;
+}
+
+.ts-who-description {
+  margin-bottom: 1.75rem;
+  font-size: 1rem;
+  color: #3a3a3a;
+}
+
+.ts-who-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 720px;
+  margin-inline: auto;
+  text-align: left;
+}
+
+.ts-who-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.98rem;
+  color: #3a3a3a;
+}
+
+.ts-who-bullet {
+  margin-top: 0.2rem;
+}
+
+.ts-learn-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.ts-learn-card {
+  flex: 1 1 260px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.ts-learn-card-meta {
+  font-size: 0.85rem;
+  color: #777777;
+  margin-bottom: 0.25rem;
+}
+
+.ts-learn-card-title {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.ts-learn-card-summary {
+  color: #3a3a3a;
+  margin-top: 0;
+}
+
+.ts-learn-card-link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background-color: #f5dbd6;
+  color: #1f1f1f;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.ts-lesson-back {
+  margin-bottom: 1rem;
+  color: #777777;
+}
+
+.ts-lesson-back-link {
+  color: #1f1f1f;
+}
+
+.ts-lesson-complete {
+  border: 1px solid #c8b89f;
+  background: #fff7f5;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1.25rem;
+}
+
+.ts-lesson-title {
+  margin-bottom: 0.25rem;
+}
+
+.ts-lesson-summary {
+  color: #555555;
+  margin-top: 0;
+}
+
+.ts-lesson-content {
+  margin-top: 1.5rem;
+}
+
+.ts-lesson-paragraph {
+  line-height: 1.6;
+  color: #333333;
+}
+
+.ts-lesson-divider {
+  margin: 2rem 0;
+  border: none;
+  border-top: 1px solid #e5e5e5;
+}
+
+.ts-lesson-quiz-title {
+  margin-bottom: 0.75rem;
+}
+
+.ts-lesson-question-card {
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ts-lesson-question-title {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.ts-lesson-choices {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.ts-lesson-choice {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ts-lesson-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.ts-lesson-submit {
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background-color: #f5dbd6;
+  color: #1f1f1f;
+  font-weight: 600;
+  opacity: 1;
+}
+
+.ts-lesson-submit-disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.ts-lesson-score {
+  color: #555555;
+}
+
+.ts-stories-grid {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.ts-stories-card {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  opacity: 1;
+  background: #ffffff;
+}
+
+.ts-stories-card-locked {
+  opacity: 0.55;
+}
+
+.ts-stories-card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ts-stories-card-title {
+  font-weight: 700;
+}
+
+.ts-stories-card-lock {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.ts-stories-card-excerpt {
+  margin-top: 0.5rem;
+}
+
+.ts-stories-card-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.ts-stories-card-locked-note {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.ts-story-title {
+  margin-top: 0.75rem;
+}
+
+.ts-story-content {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.ts-story-paragraph {
+  line-height: 1.6;
+}

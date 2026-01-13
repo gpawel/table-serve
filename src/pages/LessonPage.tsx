@@ -37,7 +37,7 @@ export const LessonPage: React.FC = () => {
   // ✅ early returns AFTER hooks
   if (!id) {
     return (
-      <div style={{ padding: "1rem 1.5rem", maxWidth: 960, margin: "0 auto" }}>
+      <div className="ts-page-container">
         <h1>Invalid lesson</h1>
         <p>Lesson id is missing.</p>
         <Link to="/learn">Back to Learn</Link>
@@ -47,7 +47,7 @@ export const LessonPage: React.FC = () => {
 
   if (!Number.isFinite(lessonId)) {
     return (
-      <div style={{ padding: "1rem 1.5rem", maxWidth: 960, margin: "0 auto" }}>
+      <div className="ts-page-container">
         <h1>Invalid lesson</h1>
         <p>Lesson id must be a number.</p>
         <Link to="/learn">Back to Learn</Link>
@@ -57,7 +57,7 @@ export const LessonPage: React.FC = () => {
 
   if (!lesson) {
     return (
-      <div style={{ padding: "1rem 1.5rem", maxWidth: 960, margin: "0 auto" }}>
+      <div className="ts-page-container">
         <h1>Lesson not found</h1>
         <Link to="/learn">Back to Learn</Link>
       </div>
@@ -90,68 +90,54 @@ export const LessonPage: React.FC = () => {
     }
   };
 
+  const isSubmitDisabled = !canSubmit || completed;
+
   return (
-    <div style={{ padding: "1rem 1.5rem", maxWidth: "960px", margin: "0 auto" }}>
-      <div style={{ marginBottom: "1rem", color: "#777" }}>
-        <Link to="/learn" style={{ color: "#1F1F1F" }}>
+    <div className="ts-page-container">
+      <div className="ts-lesson-back">
+        <Link to="/learn" className="ts-lesson-back-link">
           ← Back to Learn
         </Link>
       </div>
 
       {completed && (
         <div
-          style={{
-            border: "1px solid #C8B89F",
-            background: "#FFF7F5",
-            padding: "1rem",
-            borderRadius: "12px",
-            marginBottom: "1.25rem",
-          }}
+          className="ts-lesson-complete"
         >
           ✅ Lesson completed. Stories related to this lesson can be unlocked in V2 (or demo unlock next).
         </div>
       )}
 
-      <h1 style={{ marginBottom: "0.25rem" }}>{lesson.title}</h1>
-      <p style={{ color: "#555", marginTop: 0 }}>{lesson.summary}</p>
+      <h1 className="ts-lesson-title">{lesson.title}</h1>
+      <p className="ts-lesson-summary">{lesson.summary}</p>
 
-      <section style={{ marginTop: "1.5rem" }}>
+      <section className="ts-lesson-content">
         {lesson.content.map((p, idx) => (
-          <p key={idx} style={{ lineHeight: 1.6, color: "#333" }}>
+          <p key={idx} className="ts-lesson-paragraph">
             {p}
           </p>
         ))}
       </section>
 
-      <hr style={{ margin: "2rem 0", border: "none", borderTop: "1px solid #E5E5E5" }} />
+      <hr className="ts-lesson-divider" />
 
       <section>
-        <h2 style={{ marginBottom: "0.75rem" }}>Quick Quiz (5 questions)</h2>
+        <h2 className="ts-lesson-quiz-title">Quick Quiz (5 questions)</h2>
 
         {lesson.quiz.map((q, idx) => (
           <div
             key={q.id}
-            style={{
-              border: "1px solid #E5E5E5",
-              borderRadius: "12px",
-              padding: "1rem",
-              marginBottom: "1rem",
-            }}
+            className="ts-lesson-question-card"
           >
-            <div style={{ fontWeight: 600, marginBottom: "0.75rem" }}>
+            <div className="ts-lesson-question-title">
               {idx + 1}. {q.text}
             </div>
 
-            <div style={{ display: "grid", gap: "0.5rem" }}>
+            <div className="ts-lesson-choices">
               {q.choices.map((c) => (
                 <label
                   key={c.id}
-                  style={{
-                    display: "flex",
-                    gap: "0.5rem",
-                    alignItems: "center",
-                    cursor: "pointer",
-                  }}
+                  className="ts-lesson-choice"
                 >
                   <input
                     type="radio"
@@ -168,25 +154,20 @@ export const LessonPage: React.FC = () => {
           </div>
         ))}
 
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
+        <div className="ts-lesson-actions">
           <button
             onClick={submit}
-            disabled={!canSubmit || completed}
-            style={{
-              padding: "0.75rem 1.25rem",
-              borderRadius: "999px",
-              border: "none",
-              cursor: !canSubmit || completed ? "not-allowed" : "pointer",
-              backgroundColor: "#F5DBD6",
-              color: "#1F1F1F",
-              fontWeight: 600,
-              opacity: !canSubmit || completed ? 0.6 : 1,
-            }}
+            disabled={isSubmitDisabled}
+            className={
+              isSubmitDisabled
+                ? "ts-lesson-submit ts-lesson-submit-disabled"
+                : "ts-lesson-submit"
+            }
           >
             Submit
           </button>
 
-          <div style={{ color: "#555" }}>
+          <div className="ts-lesson-score">
             Answered: {answered}/{total} • Score: {score}/{total}
           </div>
         </div>

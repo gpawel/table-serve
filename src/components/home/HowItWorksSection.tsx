@@ -4,43 +4,20 @@ import React from "react";
 export const HowItWorksSection: React.FC = () => {
   return (
     <section
-      style={{
-        padding: "3rem 1.5rem",
-        maxWidth: "960px",
-        margin: "0 auto",
-        textAlign: "center",
-      }}
+      className="ts-how-section"
     >
       {/* Section title */}
-      <h2
-        style={{
-          fontSize: "1.8rem",
-          marginBottom: "1rem",
-          color: "#1F1F1F",
-        }}
-      >
+      <h2 className="ts-how-title">
         How it works
       </h2>
 
-      <p
-        style={{
-          marginBottom: "2.5rem",
-          fontSize: "1rem",
-          color: "#3A3A3A",
-        }}
-      >
+      <p className="ts-how-subtitle">
         A simple three-step learning flow.
       </p>
 
       {/* Three steps container */}
       <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          gap: "1.5rem",
-          justifyContent: "center",
-          flexWrap: "wrap",
-        }}
+        className="ts-how-steps"
       >
         {/* Step 1 */}
         <HowItWorksCard
@@ -76,34 +53,18 @@ type CardProps = {
 
 const HowItWorksCard: React.FC<CardProps> = ({ icon, title, description }) => (
   <div
-    style={{
-      flex: "1 1 220px",
-      backgroundColor: "#FFFFFF",
-      border: "1px solid #E5E5E5",
-      borderRadius: "12px",
-      padding: "1.5rem",
-      textAlign: "center",
-      boxShadow: "0 2px 4px rgba(0,0,0,0.05)",
-    }}
+    className="ts-how-card"
   >
-    <div style={{ fontSize: "2rem", marginBottom: "0.75rem" }}>{icon}</div>
+    <div className="ts-how-icon">{icon}</div>
 
     <h3
-      style={{
-        fontSize: "1.2rem",
-        marginBottom: "0.5rem",
-        color: "#1F1F1F",
-      }}
+      className="ts-how-card-title"
     >
       {title}
     </h3>
 
     <p
-      style={{
-        fontSize: "0.95rem",
-        color: "#3A3A3A",
-        lineHeight: 1.4,
-      }}
+      className="ts-how-card-text"
     >
       {description}
     </p>

@@ -11,60 +11,31 @@ export const WhoIsThisForSection: React.FC = () => {
 
   return (
     <section
-      style={{
-        padding: "3rem 1.5rem 4rem",
-        maxWidth: "960px",
-        margin: "0 auto",
-        textAlign: "center",
-      }}
+      className="ts-who-section"
     >
       <h2
-        style={{
-          fontSize: "1.8rem",
-          marginBottom: "0.75rem",
-          color: "#1F1F1F",
-        }}
+        className="ts-who-title"
       >
         Who is this for?
       </h2>
 
       <p
-        style={{
-          marginBottom: "1.75rem",
-          fontSize: "1rem",
-          color: "#3A3A3A",
-        }}
+        className="ts-who-description"
       >
         This app is designed for anyone who wants to feel more confident around
         the table.
       </p>
 
       <ul
-        style={{
-          listStyle: "none",
-          padding: 0,
-          margin: 0,
-          maxWidth: "720px",
-          marginInline: "auto",
-          textAlign: "left",
-        }}
+        className="ts-who-list"
       >
         {items.map((text, index) => (
           <li
             key={index}
-            style={{
-              display: "flex",
-              alignItems: "flex-start",
-              gap: "0.5rem",
-              marginBottom: "0.75rem",
-              fontSize: "0.98rem",
-              color: "#3A3A3A",
-            }}
+            className="ts-who-list-item"
           >
             <span
-              style={{
-                marginTop: "0.2rem",
-              }}
+              className="ts-who-bullet"
             >
               •
             </span>

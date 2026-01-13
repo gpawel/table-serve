@@ -6,15 +6,6 @@ import { useProgress } from "../hooks/useProgress";
 import { lessons } from "../data/lessons";
 
 
-
-const navLinkStyle: React.CSSProperties = {
-  color: "#1F1F1F",
-  textDecoration: "none",
-  padding: "0.25rem 0.5rem",
-  display: "inline-block",
-};
-
-
 type LayoutProps = {
   children: React.ReactNode;
 };
@@ -28,28 +19,20 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div>
       <header>
-        <div
-          style={{
-            maxWidth: "960px",
-            margin: "0 auto",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Link to="/" style={{ fontWeight: 600, textDecoration: "none", color: "#1F1F1F" }}>
+        <div className="ts-layout-header-inner">
+          <Link to="/" className="ts-layout-logo">
             TableServing.app
           </Link>
 
-          <nav style={{ display: "flex", gap: "1rem" }}>
-            <Link to="/learn" style={navLinkStyle}>Learn</Link>
-            <Link to="/practice" style={navLinkStyle}>Practice</Link>
-            <Link to="/stories" style={navLinkStyle}>Stories 🔒</Link>
+          <nav className="ts-layout-nav">
+            <Link to="/learn" className="ts-layout-nav-link">Learn</Link>
+            <Link to="/practice" className="ts-layout-nav-link">Practice</Link>
+            <Link to="/stories" className="ts-layout-nav-link">Stories 🔒</Link>
           </nav>
         </div>
 
         {/* ✅ ADD THIS */}
-        <div style={{ maxWidth: 960, margin: "0.75rem auto" }}>
+        <div className="ts-layout-progress">
           <ProgressBar
             completedCount={progress.completedCount}
             totalCount={progress.totalCount}
@@ -62,4 +45,3 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     </div>
   );
 };
-

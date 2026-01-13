@@ -11,7 +11,7 @@ export const StoryPage: React.FC = () => {
 
   if (!story) {
     return (
-      <div style={{ padding: "1rem 1.5rem", maxWidth: 960, margin: "0 auto" }}>
+      <div className="ts-page-container">
         <h1>Story not found</h1>
         <Link to="/stories">← Back to stories</Link>
       </div>
@@ -23,7 +23,7 @@ export const StoryPage: React.FC = () => {
 
   if (!unlocked) {
     return (
-      <div style={{ padding: "1rem 1.5rem", maxWidth: 960, margin: "0 auto" }}>
+      <div className="ts-page-container">
         <h1>{story.title} 🔒</h1>
         <p>
           This story unlocks after completing Lesson{" "}
@@ -35,14 +35,14 @@ export const StoryPage: React.FC = () => {
   }
 
   return (
-    <div style={{ padding: "1rem 1.5rem", maxWidth: 960, margin: "0 auto" }}>
+    <div className="ts-page-container">
       <Link to="/stories">← Back to stories</Link>
 
-      <h1 style={{ marginTop: "0.75rem" }}>{story.title}</h1>
+      <h1 className="ts-story-title">{story.title}</h1>
 
-      <div style={{ display: "grid", gap: "0.75rem", marginTop: "1rem" }}>
+      <div className="ts-story-content">
         {story.content.map((paragraph, index) => (
-          <p key={index} style={{ lineHeight: 1.6 }}>
+          <p key={index} className="ts-story-paragraph">
             {paragraph}
           </p>
         ))}
